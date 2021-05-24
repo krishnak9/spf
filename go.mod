@@ -1,4 +1,4 @@
-module github.com/mileusna/spf
+module github.com/krishnak9/spf
 
 go 1.15
 
