@@ -67,8 +67,13 @@ func lookupA(d string) ([]net.IP, error) {
 	}
 
 	for _, answ := range r.Answer {
-		a := answ.(*dns.A)
-		ips = append(ips, a.A)
+		switch answ.(type) {
+		case *dns.A:
+			a := answ.(*dns.A)
+			ips = append(ips, a.A)
+		default:
+
+		}
 	}
 
 	return ips, nil
@@ -83,8 +88,14 @@ func lookupAAAA(d string) ([]net.IP, error) {
 	}
 
 	for _, answ := range r.Answer {
-		a := answ.(*dns.AAAA)
-		ips = append(ips, a.AAAA)
+		switch answ.(type) {
+		case *dns.AAAA:
+			a := answ.(*dns.AAAA)
+			ips = append(ips, a.AAAA)
+		default:
+
+		}
+
 	}
 
 	return ips, nil
@@ -99,8 +110,14 @@ func lookupMX(d string) ([]string, error) {
 	}
 
 	for _, answ := range r.Answer {
-		mx := answ.(*dns.MX)
-		mxs = append(mxs, mx.Mx)
+		switch answ.(type) {
+		case *dns.MX:
+			mx := answ.(*dns.MX)
+			mxs = append(mxs, mx.Mx)
+		default:
+
+		}
+
 	}
 
 	return mxs, nil
@@ -122,8 +139,14 @@ func lookupPTR(ip net.IP) ([]string, error) {
 	}
 
 	for _, answ := range r.Answer {
-		p := answ.(*dns.PTR)
-		hosts = append(hosts, p.Ptr)
+		switch answ.(type) {
+		case *dns.PTR:
+			p := answ.(*dns.PTR)
+			hosts = append(hosts, p.Ptr)
+		default:
+
+		}
+
 	}
 
 	return hosts, nil
